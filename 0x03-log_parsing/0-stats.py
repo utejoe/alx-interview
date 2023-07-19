@@ -13,9 +13,8 @@ def parse_line(line):
     if len(parts) < 9:
         return None, None
     ip = parts[0]
-    date = parts[3][1:]
-    status_code = parts[8]
-    file_size = int(parts[9])
+    status_code = parts[-2]
+    file_size = int(parts[-1])
     return status_code, file_size
 
 def main():
