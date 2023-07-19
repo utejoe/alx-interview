@@ -10,11 +10,12 @@ def print_stats(total_size, status_codes):
 
 def parse_line(line):
     parts = line.split(" ")
-    if len(parts) < 7:
+    if len(parts) < 9:
         return None, None
     ip = parts[0]
-    status_code = parts[-2]
-    file_size = int(parts[-1])
+    date = parts[3][1:]
+    status_code = parts[8]
+    file_size = int(parts[9])
     return status_code, file_size
 
 def main():
