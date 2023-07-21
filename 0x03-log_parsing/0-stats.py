@@ -25,7 +25,7 @@ if __name__ == "__main__":
                     status_code = int(status_code)
                 except ValueError:
                     continue
-
+                
                 total_size += file_size
 
                 if status_code in status_codes:
@@ -39,4 +39,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print_stats(total_size, status_codes)
         raise
+    except PermissionError:
+        sys.exit("Permission denied. Make sure the script has executable permission.")
 
