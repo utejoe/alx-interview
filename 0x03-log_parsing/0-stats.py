@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+
 import sys
+import re
 
 def print_stats(total_size, status_codes):
     print("File size:", total_size)
@@ -14,10 +16,10 @@ if __name__ == "__main__":
     try:
         for line in sys.stdin:
             line_count += 1
-            data = line.split()
-            if len(data) >= 9:
-                status_code = data[-2]
-                file_size = data[-1]
+            # Use regular expression to match the relevant fields in the log line
+            match = re.match(r'(\d+\.\d+\.\d+\.\d+) - \[.*\] "GET \/projects\/260 HTTP\/1\.1" (\d+) (\d+)', line)
+            if match:
+                ip_address, status_code, file_size = match.groups()
                 try:
                     file_size = int(file_size)
                     status_code = int(status_code)
@@ -25,13 +27,14 @@ if __name__ == "__main__":
                     continue
 
                 total_size += file_size
+
                 if status_code in status_codes:
                     status_codes[status_code] += 1
                 else:
                     status_codes[status_code] = 1
 
-                if line_count % 10 == 0:
-                    print_stats(total_size, status_codes)
+            if line_count % 10 == 0:
+                print_stats(total_size, status_codes)
 
     except KeyboardInterrupt:
         print_stats(total_size, status_codes)
