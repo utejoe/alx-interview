@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#!/#!/~/ute/alx-interview/0x03-log_parsing/to/python3.4.3/python3.4.3
 import random
 import sys
 from time import sleep
