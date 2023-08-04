@@ -68,7 +68,7 @@ def group_exists(group):
             for grp_pos in group:
                 if stn_pos[0] == grp_pos[0] and stn_pos[1] == grp_pos[1]:
                     i += 1
-        if i == n:
+        if i == len(group):
             return True
     return False
 
